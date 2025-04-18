@@ -1,0 +1,12 @@
+{
+    "https://api.shinyapps.io": {
+        "server_url": "https://api.shinyapps.io",
+        "filename": "D:\\Desktop\\ShinyTB",
+        "app_url": "https://jesen.shinyapps.io/shinytb/",
+        "app_id": 14310234,
+        "app_guid": null,
+        "title": "ShinyTB",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}
