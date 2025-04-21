@@ -11,7 +11,8 @@ def run_simulation(population, init_infected, init_clinical,init_recovered,init_
     - init_clinical: 初始临床状态人数 (int)
     - infection_rate: 易感转感染的转换率 (float)
     - sim_days: 模拟天数 (int)
-    常假设感染事件为泊松过程（Poisson process），每个易感者被感染概率随感染人数而变，以指数分布描述【Ma et al., 2018】。通常模型设定的基本再生数R₀约为1至4，因此每名感染者年感染人数约为1–10。
+    常假设感染事件为泊松过程（Poisson process），每个易感者被感染概率随感染人数而变，以指数分布描述。
+    通常模型设定的基本再生数R₀约为1至4，因此每名感染者年感染人数约为1–10。
     返回:
     - data: 每 31 天（月）聚合的状态人数数据，类型为 Pandas DataFrame。
     - fig: 展示状态变化的堆叠区域图（Matplotlib 图形）。
@@ -60,9 +61,10 @@ def run_simulation(population, init_infected, init_clinical,init_recovered,init_
 
     # 模拟循环：每天更新状态
     for day in range(1, sim_days + 1):
+         # 计算有效感染比率
         N=S+I+C+R+D
-        # 计算有效感染比率
         effective_infection_ratio =  C / N
+        
         # 生成随机参数  
         # 选择 mean = 0.1 (中间值)，范围 0.05–0.15
         s_annual = sample_truncated_exponential(0.05, 0.15, mean=0.1)
@@ -86,7 +88,7 @@ def run_simulation(population, init_infected, init_clinical,init_recovered,init_
         d = d_annual / 365
 
         # 根据 R0 公式反推 i
-        i_annual =  basic_repro * (c_annual + r1_annual) * (r2_annual + d_annual) / c_annual *0.1
+        i_annual =  basic_repro * s_annual * (c_annual + r1_annual) * (r2_annual + d_annual) / c_annual 
         i = i_annual / 365  # 转换为日率
 
         # 更新状态转换

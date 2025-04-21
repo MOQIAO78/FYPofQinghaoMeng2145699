@@ -117,7 +117,7 @@ app_ui = ui.page_navbar(
 
 def server(input, output, session):
     print("Server function loaded.", flush=True)
-
+    r=0.1
     # 新增会话初始化逻辑
     simulation_result = reactive.Value(None)  # 将响应式变量移至会话作用域内
     session.on_ended(lambda: simulation_result.set(None))  # 会话结束时自动清理
