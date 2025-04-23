@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,7 +7,7 @@ from shiny import App, reactive, render, ui
 from sim import run_simulation
 from report import  generate_pdf_report
 
-# 定义 Shiny 应用的 UI
+# 定义 Shiny Tool的 UI
 app_ui = ui.page_navbar( 
     ui.nav_panel(
         "Introduction",
